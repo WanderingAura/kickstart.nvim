@@ -72,6 +72,13 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.filetype.add {
+  extension = {
+    vs = 'glsl',
+    fs = 'glsl',
+  },
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -568,6 +575,7 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.filetypes = (servers[server_name] or {}).filetypes
             require('lspconfig')[server_name].setup(server)
           end,
         },
